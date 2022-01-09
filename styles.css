@@ -24,7 +24,8 @@
   --bs: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   
   --bs-grey: 0 5px 0px #87b6c9, 0 6px 3px rgba(0,0,0,0.23);
-  --bs-yellow: 0 5px 0px #f2a207, 0 6px 3px rgba(0, 0, 0, 0.23);
+  --bs-yellow: 0 5px 0px #a17727, 0 6px 3px rgba(0, 0, 0, 0.23);
+  --bs-cyan: 0 5px 0px #237878, 0 6px 3px rgba(0, 0, 0, 0.23);
 
   --cell-size: 100px;
   --mark-size: calc(var(--cell-size) * 0.9);
