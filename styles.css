@@ -7,19 +7,17 @@
 /* Custom Properties */
 
 :root {
-  --clr-cyan: #38C0C0;
-  --clr-yellow: #F2B237;
-  --clr-shalowdark: #1A2B33;
-  --clr-lightdark: #1F3540;
+  --clr-cyan: #38c0c0;
+  --clr-yellow: #f2b237;
+  --clr-shalowdark: #1a2b33;
+  --clr-lightdark: #1f3540;
   --clr-grey: #a2aaad;
 
-  --ff-primary: 'Lato', sans-serif;
-  --ff-secondary:'Source Code Pro', monospace;
-  --ff-tertiary: 'Source Sans Pro', sans-serif;
+  --ff-primary: "Lato", sans-serif;
+  --ff-secondary: "Source Code Pro", monospace;
+  --ff-tertiary: "Source Sans Pro", sans-serif;
 
-
-  --bs: 0 10px 20px rgba(0,0,0,0.19),
-   0 6px 6px rgba(0,0,0,0.23);
+  --bs: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
   --cell-size: 100px;
   --mark-size: calc(var(--cell-size) * 0.9);
@@ -37,19 +35,16 @@ body {
   align-content: center;
   justify-items: center;
   align-items: center;
-  
 
-  border:var(--clr-cyan) solid;
+  border: var(--clr-cyan) solid;
 }
 
 .container {
-  
   display: grid;
   justify-content: center;
   align-content: center;
   justify-items: center;
   align-items: center;
-  
 
   /* border:var(--clr-cyan) solid; */
 }
@@ -58,109 +53,170 @@ body {
 
 .top-status-bar,
 .bottom-status-bar {
-    height: var(--status-bar-height);
-    display: grid;
-    grid-template-columns: repeat(3, auto);
+  height: var(--status-bar-height);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
 }
 
 .logo,
 .turn-indicator,
 .restart-button {
-    width: var(--cell-size);
-    margin:var(--cell-margin);
-    border-radius: 8px;
+  width: var(--cell-size);
+  margin: var(--cell-margin);
+  border-radius: 8px;
 }
 
 .logo {
-    display: flex;
-    justify-content: flex-start;
-    align-items:center;
-
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+}
+.logo__x,
+.logo__o {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  
 }
 
-.logo .fa-xmark {
-    color: var(--clr-cyan);
-    font-size: calc(var(--status-bar-height) * 0.6);
-    font-weight: bolder ;
+/* draw logo x */
+
+.logo__x::before,
+.logo__x::after {
+  background-color: var(--clr-cyan);
+  position: absolute;
+  content: "";
+  position: absolute;
+  width: calc(var(--status-bar-height) * 0.08);
+  height: calc(var(--status-bar-height) * 0.3);
 }
 
-.logo .fa-circle-dot {
-   color: var(--clr-yellow);
-    font-size: calc(var(--status-bar-height) * 0.425);
-    
-    padding-left: 0.15em;
-    
+.logo__x::before {
+  transform: rotate(45deg);
 }
+.logo__x::after {
+  transform: rotate(-45deg);
+}
+
+/* draw logo o */
+/* .logo__o::before {
+  background-color: var(--clr-yellow);
+  height: calc(var(--status-bar-height) * 0.3);
+  width: calc(var(--status-bar-height) * 0.3);
+}
+
+.logo__o::after {
+  background-color: var(--clr-shalowdark);
+  height: calc(var(--status-bar-height) * 0.14);
+  width: calc(var(--status-bar-height) * 0.14);
+}
+.logo__o::before,
+.logo__o::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.fa-xmark {
+  color: var(--clr-cyan);
+  font-size: calc(var(--status-bar-height) * 0.6);
+  font-weight: bolder;
+} */
+
+.fa-circle-dot {
+  color: var(--clr-yellow);
+  font-size: calc(var(--status-bar-height) * 0.3);
+}
+/* turn indicator */
 
 .turn-indicator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: var(--ff-primary);
-    color: var(--clr-grey);
-    /* height: calc(var(--status-bar-height) * 0.6); */
-    background: var(--clr-lightdark);
-    box-shadow: var(--bs);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--ff-primary);
+  color: var(--clr-grey);
+  /* height: calc(var(--status-bar-height) * 0.6); */
+  background: var(--clr-lightdark);
+  box-shadow: var(--bs);
 }
 .turn-indicator__icon {
-    font-size: larger;
-    font-weight: bolder;
+  font-size: larger;
+  font-weight: bolder;
 }
 
 .turn-indicator__text {
-    padding-left: 0.5em;
-    font-size: small;
+  padding-left: 0.5em;
+  font-size: small;
 }
 
-
+/* restart button */
 
 .restart-button {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
-.restart-button a{
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--clr-grey);
-    box-shadow: var(--bs);
-    padding: 5px;
-    border-radius: 5px;
-    height: calc(var(--status-bar-height) * 0.6);
-    width: calc(var(--status-bar-height) * 0.6);
+.restart-button a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--clr-grey);
+  box-shadow: var(--bs);
+  padding: 5px;
+  border-radius: 5px;
+  height: calc(var(--status-bar-height) * 0.6);
+  width: calc(var(--status-bar-height) * 0.6);
 }
-.fa-redo{
-    color: var(--clr-shalowdark);
+.fa-redo {
+  color: var(--clr-shalowdark);
 }
-
 
 /* bottom status bar */
 
 .x-wins-count,
 .tie-count,
 .o-wins-count {
-    width: var(--cell-size);
-    margin:var(--cell-margin);
-    border-radius: 8px;
-    box-shadow: var(--bs);
+  width: var(--cell-size);
+  margin: var(--cell-margin);
+  border-radius: 8px;
+  box-shadow: var(--bs);
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.25em;
 }
 
 .x-wins-count {
-    background: var(--clr-cyan);
+  background: var(--clr-cyan);
+}
+
+.bottom-status-bar {
+  color: var(--clr-shalowdark);
+  font-family: var(--ff-primary);
+}
+.x-wins-count__text,
+.tie-count__text,
+.o-wins-count__text {
+  font-size: smaller;
+}
+
+.x-wins-count__number,
+.tie-count__number,
+.o-wins-count__number {
+  font-weight: bolder;
+  text-align: center;
+  font-size: larger;
 }
 
 .tie-count {
-    background: var(--clr-grey);
+  background: var(--clr-grey);
 }
 
 .o-wins-count {
-    background: var(--clr-yellow);
+  background: var(--clr-yellow);
 }
-
-
 
 /* game board and cells */
 
@@ -181,7 +237,7 @@ body {
   border: none;
   box-shadow: var(--bs);
   background: var(--clr-lightdark);
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -189,4 +245,43 @@ body {
   cursor: pointer;
   border-radius: 10%;
   margin: var(--cell-margin);
+}
+
+/* draw the cross */
+
+.cell.x::before,
+.cell.x::after {
+  background-color: var(--clr-cyan);
+  content: "";
+  position: absolute;
+  width: calc(var(--mark-size) * 0.15);
+  height: calc(var(--mark-size) * 0.6);
+}
+
+.cell.x::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after {
+  transform: rotate(-45deg);
+}
+
+/* draw the circle */
+
+.cell.o::before {
+  background-color: var(--clr-yellow);
+  width: calc(var(--mark-size) * 0.6);
+  height: calc(var(--mark-size) * 0.6);
+}
+.cell.o::after {
+  width: calc(var(--mark-size) * 0.3);
+  height: calc(var(--mark-size) * 0.3);
+  background-color: var(--clr-lightdark);
+}
+
+.cell.o::before,
+.cell.o::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
 }
