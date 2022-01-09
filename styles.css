@@ -462,8 +462,8 @@ body {
 }
 .intro__content__pick-mark .intro__content__logo__x
  {
-    padding-top:0.5em;
-    padding-bottom: 0.5em;
+    padding-top:0.25em;
+    padding-bottom: 0.25em;
     padding-left: 2em;
     padding-right: 2em;
     border-radius: 10px;
@@ -474,8 +474,8 @@ body {
 }
 
 .intro__content__pick-mark .intro__content__logo__o {
-    padding-top:0.5em;
-    padding-bottom: 0.5em;
+    padding-top:0.25em;
+    padding-bottom: 0.25em;
     padding-left: 1em;
     padding-right: 1em;
     border-radius: 10px;
