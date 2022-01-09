@@ -12,6 +12,7 @@
   --clr-shalowdark: #1a2b33;
   --clr-lightdark: #1f3540;
   --clr-grey: #a8bfc9;
+  --clr-light-grey: #5B717C;
 
   --ff-primary: "Lato", sans-serif;
   --ff-secondary: "Source Code Pro", monospace;
@@ -22,9 +23,10 @@
   --fs-small: 1rem;
 
   --bs: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  
-  --bs-grey: 0 5px 0px #87b6c9, 0 6px 3px rgba(0,0,0,0.23);
-  --bs-yellow: 0 5px 0px #f2a207, 0 6px 3px rgba(0, 0, 0, 0.23);
+
+  --bs-grey: 0 5px 0px #87b6c9, 0 6px 3px rgba(0, 0, 0, 0.23);
+  --bs-yellow: 0 5px 0px #a17727, 0 6px 3px rgba(0, 0, 0, 0.23);
+  --bs-cyan: 0 5px 0px #237878, 0 6px 3px rgba(0, 0, 0, 0.23);
 
   --cell-size: 100px;
   --mark-size: calc(var(--cell-size) * 0.9);
@@ -42,8 +44,6 @@ body {
   align-content: center;
   justify-items: center;
   align-items: center;
-
-  
 }
 
 .container {
@@ -81,7 +81,6 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  
 }
 
 /* draw logo x */
@@ -268,98 +267,87 @@ body {
 
 /* winning message */
 .winning-message {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    justify-content: center;
-    align-items: center;
-    color: var(--clr-grey);
-    flex-direction: column;
-    
-  }
-  .winning-message__cover {
-      position: absolute;
-      top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: black;
-    opacity: 0.5;
-
-  }
-
-
-  .winning-message__banner {
-      background-color: var(--clr-lightdark);
-      row-gap: 1em;
-      width: 100%;
-      padding-top: 2em;
-      padding-bottom: 2em;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: var(--bs);
-      z-index: 1;
-  }
-
-  .winning-message__banner__who-wins{
-      
-      text-align: center;
-      font-family: var(--ff-primary);
-      font-size: var(--fs-small);
-
-  }
-.winning-message__banner__icon-and-text{
-    
-    text-align: center;
-    font-size: var(--fs-medium);
-    font-family: var(--ff-primary);
-
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  color: var(--clr-grey);
+  flex-direction: column;
+}
+.winning-message__cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.5;
 }
 
-.winning-message__banner__quit{
-    
-    margin-right: 0.5em;
-    font-family: var(--ff-primary);
-    font-size: var(--fs-small);
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    padding-left: 1em;
-    padding-right: 1em;
-    width: max-content;
-    background-color: var(--clr-grey);
-    border: none;
-    border-radius: 6px;
-    box-shadow: var(--bs-grey);
+.winning-message__banner {
+  background-color: var(--clr-lightdark);
+  row-gap: 1em;
+  width: 100%;
+  padding-top: 2em;
+  padding-bottom: 2em;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--bs);
+  z-index: 1;
 }
 
-.winning-message__banner__next-round{
-    
-    font-family: var(--ff-primary);
-    font-size: var(--fs-small);
-    width: max-content;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    padding-left: 1em;
-    padding-right: 1em;
-    width: max-content;
-    background-color: var(--clr-yellow);
-    border: none;
-    border-radius: 6px;
-    box-shadow: var(--bs-yellow);
-
+.winning-message__banner__who-wins {
+  text-align: center;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-small);
 }
-  
-  .winning-message.show {
-    display: flex;
-  }
-  
-  /* intro page */
+.winning-message__banner__icon-and-text {
+  text-align: center;
+  font-size: var(--fs-medium);
+  font-family: var(--ff-primary);
+}
+
+.winning-message__banner__quit {
+  margin-right: 0.5em;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-small);
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: max-content;
+  background-color: var(--clr-grey);
+  border: none;
+  border-radius: 6px;
+  box-shadow: var(--bs-grey);
+}
+
+.winning-message__banner__next-round {
+  font-family: var(--ff-primary);
+  font-size: var(--fs-small);
+  width: max-content;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: max-content;
+  background-color: var(--clr-yellow);
+  border: none;
+  border-radius: 6px;
+  box-shadow: var(--bs-yellow);
+}
+
+.winning-message.show {
+  display: flex;
+}
+
+/* intro page */
 .intro {
   display: flex;
   position: fixed;
@@ -517,6 +505,7 @@ body {
     padding-left: 2em;
   padding-right: 2em;
   box-shadow: var(--bs-cyan);
+
 }
 
 .intro.show {
