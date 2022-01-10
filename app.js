@@ -299,15 +299,17 @@ function cpuPlaceMark(){
     
     const cpuPickedCell = minMaxNextMove(availableCells);
     const currentClass = circleTurn ? O_CLASS : X_CLASS;
-    placeMark(cpuPickedCell, currentClass);
-    if (checkWin(currentClass)) {
-        endGame(false);
-    } else if (isTie()) {
-        endGame(true);
-    } else {
-        swapTurns();
-        swapIndicatorLogo();
-    }
+    setTimeout(() => {
+        placeMark(cpuPickedCell, currentClass);
+        if (checkWin(currentClass)) {
+            endGame(false);
+        } else if (isTie()) {
+            endGame(true);
+        } else {
+            swapTurns();
+            swapIndicatorLogo();
+        }
+    }, 300);
 }
 //currently just random
 function minMaxNextMove(availableCellsList) {
