@@ -18,7 +18,7 @@ const WINNING_PATTERNS = [
 // game board elements
 const turnIndicator = document.getElementById('turn-indicator');
 const indicatorLogo = turnIndicator.childNodes[1];
-const restartButton = document.getElementById('restart-button');
+const refreshButton = document.getElementById('restart-button');
 const cellElements = document.querySelectorAll('[data-cell');
 const board = document.getElementById('board');
 const xWinsCount = document.getElementById('x-wins-count');
@@ -91,9 +91,27 @@ introNewGameVsPlayer.addEventListener('click', () => {
     } else {
         oWinsCountText.innerText = 'O (PLAYER)';
     }
-    startGame()
+    startGame();
     isGameStarted = true;
     intro.classList.remove(SHOW);
+});
+
+refreshButton.addEventListener('click', () => {
+    if (isGameStarted) {
+        cellElements.forEach(cell => {
+            cell.classList.remove(X_CLASS);
+            cell.classList.remove(O_CLASS);
+            cell.removeEventListener('click', handleCellClick);
+            cell.addEventListener('click', handleCellClick, {
+                once: true
+            });
+        });
+        circleTurn = false;
+        if (indicatorLogo.classList[0] !== LOGO_X) {
+            indicatorLogo.classList.replace(LOGO_O, LOGO_X);
+        }
+    }
+
 });
 
 function startGame() {
@@ -105,7 +123,7 @@ function startGame() {
         cell.addEventListener('click', handleCellClick, {
             once: true
         });
-    })
+    });
     winningMessage.classList.remove(SHOW);
 }
 
@@ -137,7 +155,7 @@ function swapIndicatorLogo() {
     } else {
         indicatorLogo.classList.replace(LOGO_O, LOGO_X);
     }
-    
+
 }
 
 function swapTurns() {

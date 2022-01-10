@@ -176,7 +176,7 @@ body {
   justify-content: flex-end;
   align-items: center;
 }
-.restart-button a {
+.restart-button i {
   text-decoration: none;
   display: flex;
   justify-content: center;
