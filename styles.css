@@ -363,6 +363,15 @@ body {
     font-family: var(--ff-primary);
     
 }
+.winning-message__banner__icon-and-text.draw{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.winning-message__banner__icon-and-text.draw .winning-message__banner__icon {
+display: none;
+}
 
 .winning-message__banner__icon-and-text .logo__x i {
   display: none;
