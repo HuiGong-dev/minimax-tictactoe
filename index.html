@@ -17,6 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&family=Source+Code+Pro:wght@400;900&family=Source+Sans+Pro:wght@300;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
 </head>
 
 <body>
@@ -56,7 +57,7 @@
         <!-- game board bottom status bar -->
         <div class="bottom-status-bar">
             <div class="x-wins-count" id="x-wins-count">
-                <span class="x-wins-count__text">X (YOU)</span>
+                <span class="x-wins-count__text">X (CPU)</span>
                 <span class="x-wins-count__number">0</span>
             </div>
             <div class="tie-count" id="tie-count">
@@ -64,7 +65,7 @@
                 <span class="tie-count__number">0</span>
             </div>
             <div class="o-wins-count" id="o-wins-count">
-                <span class="o-wins-count__text">O (CPU)</span>
+                <span class="o-wins-count__text">O (YOU)</span>
                 <span class="o-wins-count__number">0</span>
             </div>
         </div>
@@ -73,16 +74,16 @@
     <div class="winning-message" id="winning-message">
         <div class="winning-message__cover"></div>
         <div class="winning-message__banner">
-            <div class="winning-message__banner__who-wins">YOU WON!</div>
-            <div class="winning-message__banner__icon-and-text draw">
+            <div class="winning-message__banner__who-wins" id="banner-who-wins">YOU WON!</div>
+            <div class="winning-message__banner__icon-and-text" id="banner-who-takes-the-round">
                 <div class="winning-message__banner__icon logo__x">
                     <i class="fa-solid fa-circle-dot"></i>
                 </div>
                 <div class="winning-message__banner__text">TAKES THE ROUND</div>
             </div>
             <div class="winning-message__banner__button-wrapper">
-                <button class="winning-message__banner__quit">QUIT</button>
-                <button class="winning-message__banner__next-round">NEXT ROUND</button>
+                <button class="winning-message__banner__quit" id="quit-button">QUIT</button>
+                <button class="winning-message__banner__next-round" id="next-round-button">NEXT ROUND</button>
             </div>
 
         </div>
@@ -102,16 +103,16 @@
             <div class="intro__content__pick-mark">
                 <div class="intro__content__pick-mark__top-text">PICK PLAYER 1'S MARK</div>
                 <div class="intro__content__logo">
-                    <div class="intro__content__logo__x"></div>
-                    <div class="intro__content__logo__o">
+                    <div class="intro__content__logo__x" id="intro__pick__logo__x"></div>
+                    <div class="intro__content__logo__o" id="intro__pick__logo__o">
                         <i class="fa-solid fa-circle-dot"></i>
                     </div>
                 </div>
                 <div class="intro__content__pick-mark__bottom-text">REMEMBER : X GOES FIRST</div>
             </div>
             <div class="intro__content__buttons">
-                <button class="intro__content__buttons__vs-cpu">NEW GAME (VS CPU)</button>
-                <button class="intro__content__buttons__vs-player">NEW GAME (VS PLAYER)</button>
+                <button class="intro__content__buttons__vs-cpu" id="new-game-vs-cpu">NEW GAME (VS CPU)</button>
+                <button class="intro__content__buttons__vs-player" id="new-game-vs-player">NEW GAME (VS PLAYER)</button>
             </div>
         </div>
         
