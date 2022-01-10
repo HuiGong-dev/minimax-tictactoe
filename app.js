@@ -80,6 +80,7 @@ introNewGameVsCpu.addEventListener('click', () => {
     } else {
         oWinsCountText.innerText = 'O (CPU)';
     }
+    startGame();
     isGameStarted = true;
     intro.classList.remove(SHOW);
 
@@ -100,6 +101,9 @@ introNewGameVsPlayer.addEventListener('click', () => {
 refreshButton.addEventListener('click', () => {
     if (isGameStarted) {
         resetGameBoard();
+        if(playerOnePickedCircle && playerOneVsCpu){
+            cpuPlaceMark();
+        }
     }
 
 });
@@ -118,6 +122,10 @@ function startGame() {
         });
     });
     winningMessage.classList.remove(SHOW);
+
+    if(playerOnePickedCircle && playerOneVsCpu){
+        cpuPlaceMark();
+    }
 }
 
 
@@ -128,17 +136,18 @@ function handleCellClick(e) {
     if (isGameStarted &&
         ((circleTurn === playerOnePickedCircle) || (!playerOneVsCpu))) {
         const cell = e.target;
-        const currentClass = circleTurn ? O_CLASS : X_CLASS;
-        placeMark(cell, currentClass);
-        if (checkWin(currentClass)) {
-            endGame(false);
-        } else if (isTie()) {
-            endGame(true);
-        } else {
-            swapTurns();
-            swapIndicatorLogo();
+        if (!cell.classList.contains(O_CLASS) && !cell.classList.contains(X_CLASS)){
+            const currentClass = circleTurn ? O_CLASS : X_CLASS;
+            placeMark(cell, currentClass);
+            if (checkWin(currentClass)) {
+                endGame(false);
+            } else if (isTie()) {
+                endGame(true);
+            } else {
+                swapTurns();
+                swapIndicatorLogo();
+            }
         }
-
     }
 }
 
@@ -153,6 +162,14 @@ function swapIndicatorLogo() {
 
 function swapTurns() {
     circleTurn = !circleTurn;
+    // if next is cpu's turn, call cpuPlaceMark().
+    if (circleTurn && !playerOnePickedCircle && playerOneVsCpu){
+        cpuPlaceMark();
+    }
+    if (!circleTurn && playerOnePickedCircle && playerOneVsCpu){
+        cpuPlaceMark();
+    }
+
 }
 
 function placeMark(cell, currentClass) {
@@ -223,7 +240,7 @@ function endGame(tie) {
         if (circleTurn) {
             handleCircleWon();
         } else {
-            handleCrossWon()
+            handleCrossWon();
         }
     }
     isGameStarted = false;
@@ -251,6 +268,9 @@ function nextRound(){
     winningMessage.classList.remove(SHOW);
     resetGameBoard();
     isGameStarted = true;
+    if(playerOnePickedCircle && playerOneVsCpu){
+        cpuPlaceMark();
+    }
 }
 
 function resetGameBoard(){
@@ -266,4 +286,30 @@ function resetGameBoard(){
     if (indicatorLogo.classList[0] !== LOGO_X) {
         indicatorLogo.classList.replace(LOGO_O, LOGO_X);
     }
+}
+
+function cpuPlaceMark(){
+    const availableCells = [];
+    cellElements.forEach((cell)=>{
+        if (!cell.classList.contains(O_CLASS) && !cell.classList.contains(X_CLASS)){
+            availableCells.push(cell);
+        }
+    });
+    console.log("available cells for cpu: "+availableCells);
+    
+    const cpuPickedCell = minMaxNextMove(availableCells);
+    const currentClass = circleTurn ? O_CLASS : X_CLASS;
+    placeMark(cpuPickedCell, currentClass);
+    if (checkWin(currentClass)) {
+        endGame(false);
+    } else if (isTie()) {
+        endGame(true);
+    } else {
+        swapTurns();
+        swapIndicatorLogo();
+    }
+}
+//currently just random
+function minMaxNextMove(availableCellsList) {
+    return availableCellsList[Math.floor(Math.random() * availableCellsList.length)];
 }
