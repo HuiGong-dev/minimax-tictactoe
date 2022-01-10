@@ -96,23 +96,16 @@ introNewGameVsPlayer.addEventListener('click', () => {
     intro.classList.remove(SHOW);
 });
 
+// game page logic
 refreshButton.addEventListener('click', () => {
     if (isGameStarted) {
-        cellElements.forEach(cell => {
-            cell.classList.remove(X_CLASS);
-            cell.classList.remove(O_CLASS);
-            cell.removeEventListener('click', handleCellClick);
-            cell.addEventListener('click', handleCellClick, {
-                once: true
-            });
-        });
-        circleTurn = false;
-        if (indicatorLogo.classList[0] !== LOGO_X) {
-            indicatorLogo.classList.replace(LOGO_O, LOGO_X);
-        }
+        resetGameBoard();
     }
 
 });
+
+quitButton.addEventListener('click', quitGame);
+nextRoundButton.addEventListener('click', nextRound);
 
 function startGame() {
     circleTurn = false;
@@ -131,6 +124,7 @@ function startGame() {
 function handleCellClick(e) {
     //handle click cell events only when game started and 
     //((it's player one's turn) or (player vs player))
+    console.log("clicked!")
     if (isGameStarted &&
         ((circleTurn === playerOnePickedCircle) || (!playerOneVsCpu))) {
         const cell = e.target;
@@ -148,7 +142,6 @@ function handleCellClick(e) {
     }
 }
 
-// swap indicator logo
 function swapIndicatorLogo() {
     if (indicatorLogo.classList[0] === LOGO_X) {
         indicatorLogo.classList.replace(LOGO_X, LOGO_O);
@@ -179,6 +172,8 @@ function isTie() {
         return cell.classList.contains(X_CLASS) || cell.classList.contains(O_CLASS);
     });
 }
+
+// winning message logic
 
 function handleTie() {
     tieCountNumber.innerText = Number(tieCountNumber.innerText) + 1;
@@ -233,4 +228,42 @@ function endGame(tie) {
     }
     isGameStarted = false;
     winningMessage.classList.add(SHOW);
+}
+
+// reset historical win, lose and tie data
+// reset mark and vs info
+function quitGame() {
+    xWinsCountNumber.innerText = 0;
+    tieCountNumber.innerText = 0;
+    oWinsCountNumber.innerText = 0;
+    if(!playerOnePickedCircle){
+        introPickLogoX.classList.remove(PICK);
+        introPickLogoO.classList.remove(UNPICK);
+    }
+    playerOnePickedCircle = true;
+    resetGameBoard();
+    
+    winningMessage.classList.remove(SHOW);
+    intro.classList.add(SHOW);
+}
+
+function nextRound(){
+    winningMessage.classList.remove(SHOW);
+    resetGameBoard();
+    isGameStarted = true;
+}
+
+function resetGameBoard(){
+    cellElements.forEach(cell => {
+        cell.classList.remove(X_CLASS);
+        cell.classList.remove(O_CLASS);
+        cell.removeEventListener('click', handleCellClick);
+        cell.addEventListener('click', handleCellClick, {
+            once: true
+        });
+    });
+    circleTurn = false;
+    if (indicatorLogo.classList[0] !== LOGO_X) {
+        indicatorLogo.classList.replace(LOGO_O, LOGO_X);
+    }
 }
