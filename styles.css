@@ -445,6 +445,7 @@ display: none;
     border-radius: 6px;
     box-shadow: var(--bs-grey-large);
     font-weight: bold;
+    color: black;
     
 
 }
@@ -464,6 +465,7 @@ display: none;
     border-radius: 6px;
     box-shadow: var(--bs-yellow);
     font-weight: bold;
+    color: black;
     
 
 }
@@ -638,6 +640,7 @@ display: none;
     row-gap: 1.5em;
     width: 100%;
     
+    
 
 }
 .intro__content__buttons__vs-cpu,
@@ -657,6 +660,7 @@ display: none;
   font-weight: bold;
   letter-spacing: 0.125em;
   width: 100%;
+  color: black;
 }
 
 .intro__content__buttons__vs-player {
