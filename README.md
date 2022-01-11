@@ -1,1 +1,1 @@
-# Classical Tic Tac Toe with minmax algorithm
+# Classical Tic Tac Toe with minimax algorithm
