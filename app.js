@@ -134,7 +134,7 @@ function startGame() {
 function handleCellClick(e) {
     //handle click cell events only when game started and 
     //((it's player one's turn) or (player vs player))
-    console.log("clicked!")
+    
     if (isGameStarted &&
         ((circleTurn === playerOnePickedCircle) || (!playerOneVsCpu))) {
         const cell = e.target;
@@ -197,9 +197,10 @@ function isTie() {
 function handleTie() {
     tieCountNumber.innerText = Number(tieCountNumber.innerText) + 1;
     whoWinsText.innerText = 'IT\'S A TIE';
-    if (!whoTakesRound.classList.contains('tie')) {
-        whoTakesRound.classList.add('tie');
-    }
+    whoTakesRound.classList.add('tie');
+    // if (!whoTakesRound.classList.contains('tie')) {
+        
+    // }
     whoTakesRoundText.innerText = "WANNA TRY AGAIN?"
 }
 
@@ -210,13 +211,16 @@ function handleCircleWon() {
     } else {
         whoWinsText.innerText = "YOU WON!"
     }
+    whoTakesRound.classList.remove('tie');
     whoTakesRoundLogo.classList.remove(LOGO_X);
-    if (!whoTakesRoundLogo.classList.contains(LOGO_O)) {
-        whoTakesRoundLogo.classList.add(LOGO_O);
-    }
-    if (!whoTakesRoundText.classList.contains('o-win')) {
-        whoTakesRoundText.classList.add('o-win');
-    }
+    whoTakesRoundLogo.classList.add(LOGO_O);
+    whoTakesRoundText.classList.add('o-win');
+    // if (!whoTakesRoundLogo.classList.contains(LOGO_O)) {
+        
+    // }
+    // if (!whoTakesRoundText.classList.contains('o-win')) {
+        
+    // }
 }
 
 function handleCrossWon() {
@@ -227,19 +231,22 @@ function handleCrossWon() {
         whoWinsText.innerText = "YOU LOSE!"
     }
     whoTakesRoundLogo.classList.remove(LOGO_O);
-    if (!whoTakesRoundLogo.classList.contains(LOGO_X)) {
-        whoTakesRoundLogo.classList.add(LOGO_X);
-    }
+    whoTakesRoundLogo.classList.add(LOGO_X);
+    // if (!whoTakesRoundLogo.classList.contains(LOGO_X)) {
+        
+    // }
     whoTakesRoundText.classList.remove('o-win');
 
 }
 
 function endGame(tie) {
+    
     if (tie) {
         handleTie();
     } else {
         whoTakesRoundText.innerText = "TAKES THE ROUND"
         if (circleTurn) {
+            
             handleCircleWon();
         } else {
             handleCrossWon();
@@ -297,7 +304,7 @@ function cpuPlaceMark(){
             availableCells.push(cell);
         }
     });
-    console.log("available cells for cpu: "+availableCells);
+    
     
     //const cpuPickedCell = randomNextMove(availableCells);
     const cpuPickedCell = minimaxNextMove();
@@ -318,16 +325,6 @@ function cpuPlaceMark(){
 function randomNextMove(availableCellsList) {
     return availableCellsList[Math.floor(Math.random() * availableCellsList.length)];
 }
-
-
-
-
-
-
-
-
-
-
 
 // find next move based on minimax algorithm
 function minimaxNextMove(){
@@ -401,11 +398,6 @@ function minimax(depth, isMaximizing) {
     }
 }
 
-
-
-
-
-
 // check win based on minimax array
 function checkWinForminimax(currentClassInminimax) {
     return WINNING_PATTERNS.some(pattern => {
@@ -436,6 +428,6 @@ function abstractCurrentBoard() {
             arrayForMinimax.push('');
         }
     });
-    console.log("abstracted board: " + arrayForMinimax );
+    
     return arrayForMinimax;
 }
