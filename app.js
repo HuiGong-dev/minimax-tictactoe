@@ -297,8 +297,12 @@ function endGame(tie) {
 // reset mark and vs info
 function quitGame() {
     xWinsCountNumber.innerText = 0;
+    xWinsCountText.innerText = 'X (CPU)';
     tieCountNumber.innerText = 0;
     oWinsCountNumber.innerText = 0;
+    oWinsCountText.innerText = 'O (YOU)';
+
+
     if(!playerOnePickedCircle){
         introPickLogoX.classList.remove(PICK);
         introPickLogoO.classList.remove(UNPICK);
