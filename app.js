@@ -379,12 +379,16 @@ function minimaxNextMove(){
     let currentPlayerMinimax = isCpuMaximizing? 'x' : 'o';
     let bestScore = isCpuMaximizing? (-Infinity) : (+Infinity);
     let move;
+    let scoreList = {};
     for (let i = 0; i < 9; i++){
         if(arrayForMinimax[i] === ''){
             arrayForMinimax[i] = currentPlayerMinimax;
             // next move is the player 1 not cpu, that's why !isCpuMaximizing
             let score = minimax(0, !isCpuMaximizing);
             arrayForMinimax[i] = '';
+            // store all score in a score list
+            scoreList[i] = score;
+            console.log("index:" + i + "score:" + score);
             if (isCpuMaximizing){
                 if (score > bestScore) {
                     bestScore = score;
@@ -398,7 +402,12 @@ function minimaxNextMove(){
             }
         }
     }
-    return cellElements[move];
+    // list of all best candidates (they all have the best score)
+    let finalCandidates = findKeysByValue(scoreList, bestScore);
+    console.log("the final candidates:" + finalCandidates)
+    let finalMove = randomNextMove(finalCandidates);
+    console.log("final move:" + finalMove);
+    return cellElements[finalMove];
 }
 
 let scores = {
@@ -438,6 +447,16 @@ function minimax(depth, isMaximizing) {
         }
         return bestScore;
     }
+}
+
+function findKeysByValue(map, score){
+    const keyList = [];
+    Object.keys(map).forEach(key => {
+        if (map[key] == score) {
+            keyList.push(key);
+        }
+    });
+    return keyList;
 }
 
 // check win based on minimax array
