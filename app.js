@@ -5,6 +5,7 @@ const LOGO_O = 'logo__o';
 const PICK = 'pick';
 const UNPICK = 'unpick';
 const SHOW = "show";
+const IN_WIN_LINE = "inWinLine";
 const WINNING_PATTERNS = [
     [0, 1, 2],
     [3, 4, 5],
@@ -239,11 +240,43 @@ function handleCrossWon() {
 
 }
 
+function getWinPattern() {
+    const currentClass = circleTurn ? O_CLASS : X_CLASS;
+    let patternFound;
+    WINNING_PATTERNS.forEach(pattern=>{
+        if(pattern.every(index => {
+            return cellElements[index].classList.contains(currentClass);
+        })){
+
+            patternFound = pattern;
+        }
+    });
+    
+    return patternFound;
+}
+
+function showWinCells(winPattern) {
+   
+    for (let i = 0; i < 3; i++) {
+        cellElements[winPattern[i]].classList.add(IN_WIN_LINE);
+    }
+}
+
+function unShowWinCells() {
+    cellElements.forEach(cell=>{
+        cell.classList.remove(IN_WIN_LINE);
+    })
+    
+}
+
 function endGame(tie) {
     
     if (tie) {
         handleTie();
     } else {
+        let pattern = getWinPattern();
+        
+        showWinCells(pattern);
         whoTakesRoundText.innerText = "TAKES THE ROUND"
         if (circleTurn) {
             
@@ -253,7 +286,10 @@ function endGame(tie) {
         }
     }
     isGameStarted = false;
-    winningMessage.classList.add(SHOW);
+    setTimeout(() => {
+        winningMessage.classList.add(SHOW);
+    }, 500);
+    
 }
 
 // reset historical win, lose and tie data
@@ -291,6 +327,7 @@ function resetGameBoard(){
             once: true
         });
     });
+    unShowWinCells();
     circleTurn = false;
     if (indicatorLogo.classList[0] !== LOGO_X) {
         indicatorLogo.classList.replace(LOGO_O, LOGO_X);
@@ -431,3 +468,5 @@ function abstractCurrentBoard() {
     
     return arrayForMinimax;
 }
+
+

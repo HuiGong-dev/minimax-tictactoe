@@ -299,12 +299,32 @@ body {
   background-color: var(--clr-lightdark);
 }
 
+
 .cell.o::before,
 .cell.o::after {
   content: "";
   position: absolute;
   border-radius: 50%;
 }
+/* cell in a win line style */
+.cell.x.inWinLine {
+  background-color: var(--clr-cyan);
+}
+.cell.x.inWinLine::before,
+.cell.x.inWinLine::after {
+  background-color: var(--clr-lightdark);
+}
+
+.cell.o.inWinLine {
+  background-color: var(--clr-yellow);
+}
+.cell.o.inWinLine::before {
+  background-color: var(--clr-lightdark);
+}
+.cell.o.inWinLine::after {
+  background-color: var(--clr-yellow);
+}
+
 
 /* winning message */
 .winning-message {
