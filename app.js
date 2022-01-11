@@ -50,6 +50,8 @@ let oWinsCountText = oWinsCount.getElementsByTagName('span')[0];
 let oWinsCountNumber = oWinsCount.getElementsByTagName('span')[1];
 let whoTakesRoundLogo = whoTakesRound.getElementsByTagName('div')[0];
 let whoTakesRoundText = whoTakesRound.getElementsByTagName('div')[1];
+// variable for minimax algorithm
+let arrayForMinimax = [];
 // show intro page
 intro.classList.add(SHOW);
 
@@ -297,7 +299,8 @@ function cpuPlaceMark(){
     });
     console.log("available cells for cpu: "+availableCells);
     
-    const cpuPickedCell = minMaxNextMove(availableCells);
+    //const cpuPickedCell = randomNextMove(availableCells);
+    const cpuPickedCell = minimaxNextMove();
     const currentClass = circleTurn ? O_CLASS : X_CLASS;
     setTimeout(() => {
         placeMark(cpuPickedCell, currentClass);
@@ -311,7 +314,128 @@ function cpuPlaceMark(){
         }
     }, 300);
 }
-//currently just random
-function minMaxNextMove(availableCellsList) {
+//just random
+function randomNextMove(availableCellsList) {
     return availableCellsList[Math.floor(Math.random() * availableCellsList.length)];
+}
+
+
+
+
+
+
+
+
+
+
+
+// find next move based on minimax algorithm
+function minimaxNextMove(){
+    // abstract board and only use the class information for minimax
+    arrayForMinimax = abstractCurrentBoard();
+    // x is maximizing player o is minimizing player
+    // player 1 picked o then cpu is x (aka miximizing player) and vice versa 
+    let isCpuMaximizing = playerOnePickedCircle;
+    console.log("is cpu maximizing?" + isCpuMaximizing);
+    let currentPlayerMinimax = isCpuMaximizing? 'x' : 'o';
+    let bestScore = isCpuMaximizing? (-Infinity) : (+Infinity);
+    let move;
+    for (let i = 0; i < 9; i++){
+        if(arrayForMinimax[i] === ''){
+            arrayForMinimax[i] = currentPlayerMinimax;
+            // next move is the player 1 not cpu, that's why !isCpuMaximizing
+            let score = minimax(0, !isCpuMaximizing);
+            arrayForMinimax[i] = '';
+            if (isCpuMaximizing){
+                if (score > bestScore) {
+                    bestScore = score;
+                    move = i;
+                }
+            } else {
+                if (score < bestScore) {
+                    bestScore = score;
+                    move = i
+                }
+            }
+        }
+    }
+    return cellElements[move];
+}
+
+let scores = {
+    x: 10,
+    o: -10,
+    tie: 0
+}
+
+function minimax(depth, isMaximizing) {
+    let currentPlayer = isMaximizing? 'x' : 'o';
+    if(checkWinForminimax(currentPlayer)){
+        return scores[currentPlayer];
+    } else if (checkTieForMinimax()) {
+        return scores['tie']
+    } 
+
+    if (isMaximizing){
+        let bestScore = -Infinity;
+        for (let i = 0; i < 9; i++){
+            if (arrayForMinimax[i] === ''){
+                arrayForMinimax[i] = 'x';
+                let score = minimax(depth + 1, false);
+                arrayForMinimax[i] = '';
+                bestScore = Math.max(score, bestScore);
+            }
+        }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < 9; i++){
+            if (arrayForMinimax[i] === ''){
+                arrayForMinimax[i] = 'o';
+                let score = minimax(depth + 1, true);
+                arrayForMinimax[i] = '';
+                bestScore = Math.min(score, bestScore);
+            }
+        }
+        return bestScore;
+    }
+}
+
+
+
+
+
+
+// check win based on minimax array
+function checkWinForminimax(currentClassInminimax) {
+    return WINNING_PATTERNS.some(pattern => {
+        return pattern.every(index => {
+            return arrayForMinimax[index] === currentClassInminimax;
+        });
+    });
+}
+
+function checkTieForMinimax() {
+    return [...arrayForMinimax].every(cell => {
+        return cell === 'o' || cell === 'x';
+    });
+}
+
+function placeMarkForMinimax(cellIndexInminimax, currentClassInminimax){
+    arrayForMinimax[cellIndexInminimax] = currentClassInminimax;
+}
+//abstract current board to an array for minimax algorithm
+function abstractCurrentBoard() {
+    arrayForMinimax = [];
+    cellElements.forEach(cell => {
+        if(cell.classList.contains(O_CLASS)){
+            arrayForMinimax.push('o');
+        } else if (cell.classList.contains(X_CLASS)){
+            arrayForMinimax.push('x');
+        } else {
+            arrayForMinimax.push('');
+        }
+    });
+    console.log("abstracted board: " + arrayForMinimax );
+    return arrayForMinimax;
 }
