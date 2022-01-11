@@ -231,6 +231,7 @@ function handleCrossWon() {
     } else {
         whoWinsText.innerText = "YOU LOSE!"
     }
+    whoTakesRound.classList.remove('tie');
     whoTakesRoundLogo.classList.remove(LOGO_O);
     whoTakesRoundLogo.classList.add(LOGO_X);
     // if (!whoTakesRoundLogo.classList.contains(LOGO_X)) {
@@ -288,7 +289,7 @@ function endGame(tie) {
     isGameStarted = false;
     setTimeout(() => {
         winningMessage.classList.add(SHOW);
-    }, 500);
+    }, 200);
     
 }
 

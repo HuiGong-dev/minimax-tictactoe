@@ -471,6 +471,26 @@ display: none;
   .winning-message.show {
     display: flex;
   }
+
+ 
+
+  .winning-message.show .winning-message__banner {
+    animation: slide-in-from-left;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    
+  }
+
+
+
+  @keyframes slide-in-from-left {
+    0%{
+      transform: translateX(-100%);
+    }
+    100%{
+      transform: translate(0);
+    }
+  }
   
   /* intro page */
 .intro {
