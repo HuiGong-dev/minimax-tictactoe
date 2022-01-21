@@ -1,3 +1,7 @@
 # Classical Tic Tac Toe with minimax algorithm
 
 [live demo](https://dreamy-nobel-d0ba58.netlify.app/)
+
+## Screen shot
+
+![intro](img/intro.png) { width: 250px; }
