@@ -4,8 +4,4 @@
 
 ## Screen shot
 
-<<<<<<< HEAD
-![intro](img/intro.png) 
-=======
 <img src="img/intro.png" width="350">
->>>>>>> deb9435 (resize img)
