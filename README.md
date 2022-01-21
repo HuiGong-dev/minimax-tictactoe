@@ -4,4 +4,4 @@
 
 ## Screen shot
 
-![intro](img/intro.png) { width: 250px; }
+![intro](img/intro.png) 
