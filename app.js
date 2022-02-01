@@ -17,10 +17,17 @@ io.on('connection', (socket) => {
     socket.on('player1PickedCircle', (data)=>{
         player1PickedCircle = data;
         console.log(player1PickedCircle);
+        console.log(socket.id);//feature room id
     });
     socket.on('join', () => {
         io.emit('player1PickedCircle', player1PickedCircle);
     });
+
+    // socket.on('join', (room) => {
+    //     socket.join(room);
+    //     io.emit('player1PickedCircle', player1PickedCircle);
+    // });
+
     socket.on('msg', (msg) => {
       io.emit('msg', msg);
     });
