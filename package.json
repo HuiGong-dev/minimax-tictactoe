@@ -1,0 +1,25 @@
+{
+  "name": "minimax-tietactoe",
+  "version": "1.0.0",
+  "description": "[live demo](https://dreamy-nobel-d0ba58.netlify.app/)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HuiGong-dev/minimax-tictactoe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HuiGong-dev/minimax-tictactoe/issues"
+  },
+  "homepage": "https://github.com/HuiGong-dev/minimax-tictactoe#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "socket.io": "^4.4.1"
+  }
+}

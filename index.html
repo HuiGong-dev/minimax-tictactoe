@@ -17,8 +17,9 @@
         href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&family=Source+Code+Pro:wght@400;900&family=Source+Sans+Pro:wght@300;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="app.js" defer></script>
+    <script src="index.js" defer></script>
 </head>
+
 
 <body>
     <!-- game page -->
@@ -44,7 +45,7 @@
         </div>
         <!-- game board main -->
         <div class="board" id="board">
-            <div class="cell" data-cell></div>
+            <div class="cell" index="1" data-cell></div>
             <div class="cell" data-cell></div>
             <div class="cell" data-cell></div>
             <div class="cell" data-cell></div>
@@ -113,6 +114,8 @@
             <div class="intro__content__buttons">
                 <button class="intro__content__buttons__vs-cpu" id="new-game-vs-cpu">NEW GAME (VS CPU)</button>
                 <button class="intro__content__buttons__vs-player" id="new-game-vs-player">NEW GAME (VS PLAYER)</button>
+                <button class="intro__content__buttons__vs-player__new-online" id="new-game-vs-player-online">NEW GAME (ONLINE)</button>
+                <button class="intro__content__buttons__vs-player__join" id="join-game-vs-player">JOIN GAME (ONLINE)</button>
             </div>
         </div>
         
@@ -120,7 +123,7 @@
     </div>
 
 
-
+    <script src="/socket.io/socket.io.js"></script>
 </body>
 
 </html>
