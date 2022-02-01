@@ -16,6 +16,12 @@ io.on('connection', (socket) => {
     socket.on('msg', (msg) => {
       io.emit('msg', msg);
     });
+    socket.on('quit', ()=>{
+        io.emit('quit');
+    });
+    socket.on('next-round', ()=>{
+        io.emit('next-round');
+    })
   });
 
 server.listen(3050, ()=> {

@@ -152,8 +152,15 @@ refreshButton.addEventListener('click', () => {
 
 });
 
-quitButton.addEventListener('click', quitGame);
-nextRoundButton.addEventListener('click', nextRound);
+quitButton.addEventListener('click', ()=>{
+    socket.emit('quit');
+});
+socket.on('quit', quitGame);
+
+nextRoundButton.addEventListener('click', ()=>{
+    socket.emit('next-round');
+});
+socket.on('next-round', nextRound);
 
 function startGame() {
     circleTurn = false;
@@ -165,6 +172,8 @@ function startGame() {
             once: true
         });
     });
+    quitButton.style.display = "unset";
+    nextRoundButton.style.display = "unset";
     winningMessage.classList.remove(SHOW);
 
     if (playerOnePickedCircle && playerOneVsCpu) {
@@ -357,6 +366,10 @@ function endGame(tie) {
         }
     }
     isGameStarted = false;
+    if (!isClientPlayer1){
+        quitButton.style.display = "none";
+        nextRoundButton.style.display = "none";
+    }
     setTimeout(() => {
         winningMessage.classList.add(SHOW);
     }, 200);
@@ -380,11 +393,16 @@ function quitGame() {
     playerOnePickedCircle = true;
     resetGameBoard();
 
+    quitButton.style.display = "unset";
+    nextRoundButton.style.display = "unset";
+
     winningMessage.classList.remove(SHOW);
     intro.classList.add(SHOW);
 }
 
 function nextRound() {
+    quitButton.style.display = "unset";
+    nextRoundButton.style.display = "unset";
     winningMessage.classList.remove(SHOW);
     resetGameBoard();
     isGameStarted = true;
