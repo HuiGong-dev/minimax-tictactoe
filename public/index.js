@@ -63,8 +63,14 @@ let isOnline = false;
 // if client start new game: is player1. when client join a game, is player2.
 let isClientPlayer1 = true;
 
+socket.on("connect", () => {
+    console.log(socket.id);
+  });
+
 // show intro page
 intro.classList.add(SHOW);
+
+
 
 
 // handle player 1 pick mark events
@@ -119,6 +125,10 @@ introNewGameOnline.addEventListener('click', () => {
     } else {
         oWinsCountText.innerText = 'O (PLAYER)';
     }
+
+    socket.emit('player1PickedCircle', playerOnePickedCircle);
+
+    
     startGame();
     isGameStarted = true;
     intro.classList.remove(SHOW);
@@ -128,16 +138,22 @@ introJoinGameOnline.addEventListener('click', ()=>{
     playerOneVsCpu = false;
     isClientPlayer1 = false;
     isOnline = true;
-    if (playerOnePickedCircle) {
-        oWinsCountText.innerText = 'O (PLAYER)';
-        xWinsCountText.innerText = 'X (YOU)';
-    } else {
-        oWinsCountText.innerText = 'O (YOU)';
-        xWinsCountText.innerText = 'X (PLAYER)';
-    }
-    startGame();
-    isGameStarted = true;
-    intro.classList.remove(SHOW);
+    
+    socket.emit('join');
+    socket.on('player1PickedCircle', (data)=>{
+        playerOnePickedCircle = data;
+        if (playerOnePickedCircle) {
+            oWinsCountText.innerText = 'O (PLAYER)';
+            xWinsCountText.innerText = 'X (YOU)';
+        } else {
+            oWinsCountText.innerText = 'O (YOU)';
+            xWinsCountText.innerText = 'X (PLAYER)';
+        }
+        startGame();
+        isGameStarted = true;
+        intro.classList.remove(SHOW);
+    });
+    
 
 })
 
