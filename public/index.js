@@ -168,9 +168,7 @@ function startGame() {
         cell.classList.remove(X_CLASS);
         cell.classList.remove(O_CLASS);
         cell.removeEventListener('click', handleCellClick);
-        cell.addEventListener('click', handleCellClick, {
-            once: true
-        });
+        cell.addEventListener('click', handleCellClick);
     });
     quitButton.style.display = "unset";
     nextRoundButton.style.display = "unset";
@@ -195,20 +193,6 @@ function handleCellClick(e) {
             const cell = e.target;
             reactToClickEvent(cell);
         }
-
-        // const cell = e.target;
-        // if (!cell.classList.contains(O_CLASS) && !cell.classList.contains(X_CLASS)){
-        //     const currentClass = circleTurn ? O_CLASS : X_CLASS;
-        //     placeMark(cell, currentClass);
-        //     if (checkWin(currentClass)) {
-        //         endGame(false);
-        //     } else if (isTie()) {
-        //         endGame(true);
-        //     } else {
-        //         swapTurns();
-        //         swapIndicatorLogo();
-        //     }
-        // }
     }
 }
 
@@ -416,9 +400,7 @@ function resetGameBoard() {
         cell.classList.remove(X_CLASS);
         cell.classList.remove(O_CLASS);
         cell.removeEventListener('click', handleCellClick);
-        cell.addEventListener('click', handleCellClick, {
-            once: true
-        });
+        cell.addEventListener('click', handleCellClick);
     });
     unShowWinCells();
     circleTurn = false;
